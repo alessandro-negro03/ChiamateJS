@@ -1,0 +1,8 @@
+installa fetch:
+npm install node-fetch
+inizializza cartella:
+npm init
+
+guida chiamate:
+
+https://stackabuse.com/making-http-requests-in-node-js-with-node-fetch/
