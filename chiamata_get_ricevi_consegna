@@ -1,0 +1,15 @@
+const fetch = require("node-fetch")
+
+fetch("http://localhost:8080/esercizi/1",{
+  method: "get",
+  headers: {
+    "x-data": "true"
+  },
+})
+.then(res => res.json())
+.then(resBody => {
+
+  const reqData = resBody.data
+  
+  console.log(resBody)
+})
