@@ -1,0 +1,26 @@
+const array = [1, 2, 3, 4, 5, 6]
+
+//reduce
+const reducer = (acc, currentValue) => acc = acc + currentValue;
+const x = array.reduce(reducer) 
+console.log(x)
+// reduce
+
+//map
+console.log(array)
+const somma = (value) => value = value + 1;
+const risultato_map = array.map(somma) // é uguale ad const risultato_map = array.map(p => p +1)
+console.log(array)
+console.log(risultato_map)
+
+//filter
+const bigenought  = (value) => {
+    return value > 3
+}
+const risultato_filter = array.filter(bigenought)
+console.log(array)
+console.log(risultato_filter)
+
+//forEach
+const stampa =(value)=>console.log(value)
+array.forEach(stampa)
