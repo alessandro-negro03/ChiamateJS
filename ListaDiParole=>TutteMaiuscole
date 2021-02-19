@@ -1,0 +1,31 @@
+const fetch = require("node-fetch")
+
+fetch("http://localhost:8080/esercizi/5",{
+  method: "get",
+  headers: {
+    "x-data": "true"
+  },
+})
+.then(res => res.json())
+.then(resBody => {
+
+  const dati = resBody.data
+  //zona risoluzione es
+  console.log(dati)
+  const risultato = dati.map(p => p.toUpperCase())
+  console.log(risultato)
+  //zona risoluzione es
+  return fetch("http://localhost:8080/esercizi/5",{
+    method: "post",
+    body: JSON.stringify({
+      data: risultato
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }  
+  })
+
+})
+.then(res => res.json())
+.then(resBody => console.log(resBody))
+.catch(err => console.log(err))
