@@ -1,0 +1,42 @@
+const fetch = require("node-fetch")
+
+fetch("http://localhost:8080/esercizi/7",{
+  method: "get",
+  headers: {
+    "x-data": "true"
+  },
+})
+.then(res => res.json())
+.then(resBody => {
+
+  const dati = resBody.data
+  //zona risoluzione es
+  console.log(dati)
+  const maj = (value) => {
+    return value > 5;
+  };
+
+  const ris = dati.filter(maj)
+  console.log(ris)
+  
+  const reducer = (accumulator, currentValue) => accumulator + currentValue;
+
+  const risultato = ris.reduce(reducer)
+
+  
+  
+  //zona risoluzione es
+  return fetch("http://localhost:8080/esercizi/7",{
+    method: "post",
+    body: JSON.stringify({
+      data: risultato
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }  
+  })
+
+})
+.then(res => res.json())
+.then(resBody => console.log(resBody))
+.catch(err => console.log(err))
