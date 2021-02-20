@@ -1,0 +1,29 @@
+const fetch = require("node-fetch")
+fetch("http://192.168.1.60:8080/esercizi/20", {
+    method: "get",
+    headers:{
+        "x-data": "true"
+    },
+
+})
+.then(res => res.json())
+.then(body => {
+  const newarray = body.data.map(e => {
+    return e.figli.length  
+  })
+  console.log(newarray)
+  return fetch("http://192.168.1.60:8080/esercizi/20",{
+      method:"post",
+      body: JSON.stringify({
+          data: newarray
+      }),
+      headers:{
+          "Content-Type":"application/json"
+      }
+  })
+})
+.then(res => res.json())
+.then(console.log)
+.catch(err => console.log(err))
+
+
