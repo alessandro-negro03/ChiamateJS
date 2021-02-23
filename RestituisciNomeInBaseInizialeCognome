@@ -1,0 +1,43 @@
+const fetch = require("node-fetch")
+
+fetch("http://localhost:8080/esercizi/24",{
+  method: "get",
+  headers: {
+    "x-data": "true"
+  },
+})
+.then(res => res.json())
+.then(resBody => {
+
+  let dati = resBody.data
+  //zona risoluzione es
+  const iniziale = (value) =>{
+      if (value.cognome[0] === "C"){
+          return value
+      }
+  }
+
+  const ris = dati.filter(iniziale)
+
+  const nome = (value) =>{
+      return value.nome
+  }
+  const risultato = ris.map(nome)
+
+
+  console.log(risultato)
+  //zona risoluzione es
+  return fetch("http://localhost:8080/esercizi/24",{
+    method: "post",
+    body: JSON.stringify({
+      data: risultato
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }  
+  })
+
+})
+.then(res => res.json())
+.then(resBody => console.log(resBody))
+.catch(err => console.log(err))
