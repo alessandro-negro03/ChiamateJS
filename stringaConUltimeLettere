@@ -1,0 +1,37 @@
+const fetch = require("node-fetch")
+
+fetch("http://localhost:8080/esercizi/17",{
+  method: "get",
+  headers: {
+    "x-data": "true"
+  },
+})
+.then(res => res.json())
+.then(resBody => {
+
+  //zona risoluzione es
+  const iniziale = (value) =>{
+        return value[value.length-1]
+    }
+  const ris=resBody.data.map(iniziale)
+  console.log(ris)
+  const reducer = (acc, currentValue) => acc = acc + currentValue;
+  const risultato= ris.reduce(reducer)
+  console.log(risultato)
+
+  
+  //zona risoluzione es
+  return fetch("http://localhost:8080/esercizi/17",{
+    method: "post",
+    body: JSON.stringify({
+      data: risultato
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }  
+  })
+
+})
+.then(res => res.json())
+.then(resBody => console.log(resBody))
+.catch(err => console.log(err))
