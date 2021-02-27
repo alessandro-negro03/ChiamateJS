@@ -1,0 +1,38 @@
+const fetch = require("node-fetch")
+
+//filtra multipli di 3
+fetch("http://192.168.1.231:8080/esercizi/1",{
+  method: "get",
+  headers: {
+    "x-data": "true"
+  },
+})
+.then(res => res.json())
+.then(resBody => {
+
+  let dati = resBody.data
+  //zona risoluzione es
+  const filtro  = (value) => {
+    return  value%3===0
+  }
+        
+    
+    
+const risultato = dati.filter(filtro)
+console.log(risultato)
+
+  //zona risoluzione es
+  return fetch("http://192.168.1.231:8080/esercizi/1",{
+    method: "post",
+    body: JSON.stringify({
+      data: risultato
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }  
+  })
+
+})
+.then(res => res.json())
+.then(resBody => console.log(resBody))
+.catch(err => console.log(err))
