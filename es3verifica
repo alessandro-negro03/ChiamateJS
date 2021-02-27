@@ -1,0 +1,51 @@
+//'Data una lista di parole restituisci la somma di tutte le lunghezze delle parole che abbiano meno di 5 lettere'
+const fetch = require("node-fetch")
+
+fetch("http://192.168.1.231:8080/esercizi/3",{
+  method: "get",
+  headers: {
+    "x-data": "true"
+  },
+})
+.then(res => res.json())
+.then(resBody => {
+
+  let dati = resBody.data
+  //zona risoluzione es
+  
+  
+  const minore = (value)=>{
+      return (value.length <5)
+          
+      
+}
+  const lunghezza = (value) =>{
+      return value.length
+
+  }
+  const ris = dati.filter(minore)
+  const ris2 = ris.map(lunghezza)
+  const reducer = (acc, currentValue) =>{
+      return acc = acc+currentValue
+  }
+  const risultato = ris2.reduce(reducer,0)
+  
+
+  console.log(risultato)
+
+  
+  //zona risoluzione es
+  return fetch("http://192.168.1.231:8080/esercizi/3",{
+    method: "post",
+    body: JSON.stringify({
+      data: risultato
+    }),
+    headers: {
+      "Content-Type": "application/json"
+    }  
+  })
+
+})
+.then(res => res.json())
+.then(resBody => console.log(resBody))
+.catch(err => console.log(err))
